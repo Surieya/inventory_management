@@ -4,8 +4,10 @@ import { useMutation } from "react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import useAuth from "../useAuth";
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const { setAuth } = useAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -39,6 +41,11 @@ const Login = () => {
     },
     onSuccess: (data) => {
       setAuth(data);
+      if (data.role === "InventoryT") {
+        navigate("/inventoryUser");
+      } else {
+        navigate("/deliveryUser");
+      }
     },
   });
 

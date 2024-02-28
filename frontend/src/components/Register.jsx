@@ -2,9 +2,11 @@ import React from "react";
 import { useFormik } from "formik";
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 const Register = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -37,9 +39,9 @@ const Register = () => {
       return res.data;
     },
 
-    // onSuccess: () => {
-    //     queryClient.invalidateQueries("user")
-    // }
+    onSuccess: () => {
+      navigate("/login");
+    },
   });
 
   const onSubmit = (value) => {
